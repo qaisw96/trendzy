@@ -21,9 +21,15 @@ const ProductPage = ({ product, products }: ProductPageProps) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const products: IProduct[] = await fetchProducts();
 
-  const paths = products.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
+  const paths = products
+    .filter(
+      (product) =>
+        product.category === "men's clothing" ||
+        product.category === "women's clothing"
+    )
+    .map((product) => ({
+      params: { id: product.id.toString() },
+    }));
 
   return {
     paths,
@@ -36,9 +42,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     const [product, products] = await Promise.all([
-      fetchProduct(parseInt(id as string, 10)),
+      fetchProduct(Number(id)),
       fetchProducts(),
     ]);
+
+    console.log(product);
 
     const clothingProducts = products.filter(
       (product) =>
