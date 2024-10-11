@@ -1,8 +1,8 @@
+import React from 'react';
 import { useCartContext } from '@/context/CartContext';
 import { IProduct } from '@/interfaces/product';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/motion/motionSettings';
 

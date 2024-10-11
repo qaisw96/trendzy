@@ -1,7 +1,5 @@
 import { IProduct } from '@/interfaces/product';
 import React, { useCallback, useState } from 'react';
-import Rating from './Rating';
-import QuantityControl from './QuantityControl';
 import ProductNavigation from './ProductNavigation';
 import { useCartContext } from '@/context/CartContext';
 import { isProductInCart } from '@/utils/cart';
