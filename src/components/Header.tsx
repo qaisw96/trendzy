@@ -18,7 +18,11 @@ const Header = () => {
         <nav>
           <ul className='flex gap-8'>
             <li className='text-base'>
-              <Link href='/#products'>SHOP</Link>
+              <Link
+                href='/#products'
+                className='hover:underline focus:underline'>
+                SHOP
+              </Link>
             </li>
             <li className='text-base flex gap-1'>
               <Link href='/cart' className='hover:underline focus:underline'>
