@@ -19,7 +19,7 @@ const Product = ({ product }: ProductProps) => {
   };
 
   return (
-    <div className='relative animate-fade-in group border-2 border-slate-200 h-full p-2 md:p-12'>
+    <div className='relative animate-fade-in-up group border-2 border-slate-200 h-full p-2 md:p-12'>
       <div className='w-full h-full'>
         <Image
           src={product.image}
@@ -32,7 +32,7 @@ const Product = ({ product }: ProductProps) => {
       <div className='absolute p-4 inset-0 flex gap-3 flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-700'>
         <Link
           href={`/products/${product.id}`}
-          className='text-lg font-semibold'>
+          className='text-sm md:text-lg font-semibold'>
           {product.title}
         </Link>
         {quantity ? (

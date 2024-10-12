@@ -27,7 +27,7 @@ const config: Config = {
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-in-out forwards',
-        'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+        'fade-in-up': 'fade-in-up 0.5s ease-in-out forwards',
       },
       colors: {
         background: 'var(--background)',
