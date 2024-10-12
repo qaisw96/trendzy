@@ -56,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props: { product, products: clothingProducts },
     };
   } catch (error) {
-    console.error('Error fetching product or products:', error);
+    console.error('Error fetching product:', error);
     return { notFound: true };
   }
 };

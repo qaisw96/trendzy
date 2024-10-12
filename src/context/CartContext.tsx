@@ -60,7 +60,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
 export const useCartContext = (): CartContextType => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error('useCartContext must be used within an CartProvider');
+    throw new Error('useCartContext must be used in CartProvider');
   }
   return context;
 };

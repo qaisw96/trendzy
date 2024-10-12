@@ -4,15 +4,12 @@ const fetchFromApi = async (url: string) => {
   try {
     const res = await fetch(url);
     if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+      throw new Error(`Error fetching data: ${res.status}`);
     }
     return await res.json();
   } catch (error: unknown) {
-    const errorMessage =
-      error instanceof Error
-        ? `Error: ${error.message}`
-        : 'Unknown error occurred.';
-    throw new Error(errorMessage);
+    console.error('Fetch error:', error);
+    throw new Error('Error fetching data');
   }
 };
 

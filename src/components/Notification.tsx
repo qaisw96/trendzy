@@ -6,12 +6,14 @@ interface NotificationProps {
   onClose: () => void;
 }
 
+const TIME_OUT = 3000;
+
 const Notification = ({ message, isVisible, onClose }: NotificationProps) => {
   useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(() => {
         onClose();
-      }, 3000);
+      }, TIME_OUT);
       return () => clearTimeout(timer);
     }
   }, [isVisible, onClose]);
