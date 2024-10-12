@@ -13,7 +13,7 @@ const ProductActions = ({
   handleAddToCart,
 }: ProductActionsProps) => {
   return (
-    <div className='flex flex-col md:flex-row gap-6 tracking-wider'>
+    <div className='flex flex-col md:flex-row gap-6'>
       <QuantityControl
         handleQuantityChange={handleQuantityChange}
         productId={productId}

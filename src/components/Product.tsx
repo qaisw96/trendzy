@@ -1,10 +1,8 @@
 import React from 'react';
-import { useCartContext } from '@/context/CartContext';
-import { IProduct } from '@/interfaces/product';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/motion/motionSettings';
+import { useCartContext } from '@/context/CartContext';
+import { IProduct } from '@/interfaces/product';
 
 interface ProductProps {
   product: IProduct;
@@ -21,16 +19,14 @@ const Product = ({ product }: ProductProps) => {
   };
 
   return (
-    <motion.div
-      className='relative group border-2 border-slate-200 h-full p-12'
-      {...fadeInUp}>
+    <div className='relative animate-fade-in group border-2 border-slate-200 h-full p-2 md:p-12'>
       <div className='w-full h-full'>
         <Image
           src={product.image}
           alt={product.title}
           width={300}
           height={300}
-          className='w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-20'
+          className='w-full h-full transition-opacity duration-700 group-hover:opacity-20'
         />
       </div>
       <div className='absolute p-4 inset-0 flex gap-3 flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-700'>
@@ -53,7 +49,7 @@ const Product = ({ product }: ProductProps) => {
         )}
         <p className='text-gray-800'>${product.price}</p>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,8 +1,10 @@
+import React from 'react';
+import { GetStaticProps } from 'next';
 import { IProduct } from '@/interfaces/product';
+import { fetchProducts } from '@/api/products';
+import { filterClothingProducts } from '@/utils/product';
 import ProductList from '@/components/ProductList';
 import Layout from '@/components/Layout';
-import { fetchProducts } from '@/api/products';
-import { GetStaticProps } from 'next';
 import Banner from '@/components/Banner';
 
 interface HomeProps {
@@ -22,11 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
   try {
     const products: IProduct[] = await fetchProducts();
 
-    const clothingProducts = products.filter(
-      (product) =>
-        product.category === "men's clothing" ||
-        product.category === "women's clothing"
-    );
+    const clothingProducts = filterClothingProducts(products);
 
     return { props: { products: clothingProducts } };
   } catch (error) {

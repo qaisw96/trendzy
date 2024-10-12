@@ -17,9 +17,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a className='underline' href='#products'>
+                <Link className='underline' href='/#products'>
                   Shop
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

@@ -1,6 +1,6 @@
-import { IProduct } from '@/interfaces/product';
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+import { IProduct } from '@/interfaces/product';
 
 interface ProductsNavigationProps {
   currentProductId: number;
@@ -11,15 +11,21 @@ const ProductsNavigation = ({
   products,
   currentProductId,
 }: ProductsNavigationProps) => {
-  const currentIndex = products.findIndex((p) => p.id === currentProductId);
+  const currentProductIndex = products.findIndex(
+    (product) => product.id === currentProductId
+  );
 
-  const prevProductIndex =
-    currentIndex === 0 ? products.length - 1 : currentIndex - 1;
-  const nextProductIndex =
-    currentIndex === products.length - 1 ? 0 : currentIndex + 1;
+  const getSurroundingProductIndexes = (index: number) => {
+    const prevIndex = index === 0 ? products.length - 1 : index - 1;
+    const nextIndex = index === products.length - 1 ? 0 : index + 1;
+    return { prevIndex, nextIndex };
+  };
 
-  const prevProduct = products[prevProductIndex].id;
-  const nextProduct = products[nextProductIndex].id;
+  const { prevIndex, nextIndex } =
+    getSurroundingProductIndexes(currentProductIndex);
+
+  const prevProduct = products[prevIndex].id;
+  const nextProduct = products[nextIndex].id;
 
   return (
     <div className='flex justify-between'>

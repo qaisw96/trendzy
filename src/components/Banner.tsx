@@ -1,27 +1,25 @@
-import Image from 'next/image';
 import React from 'react';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/motion/motionSettings';
+import Image from 'next/image';
 
-const imageUrl =
+const IMAGE_URL =
   'https://adorn.qodeinteractive.com/wp-content/uploads/2017/05/slider-h5-img-3.jpg';
 
 const Banner = () => {
   return (
-    <motion.section {...fadeInUp} className='relative'>
+    <div className='relative animate-fade-in-up'>
       <Image
-        src={imageUrl}
+        src={IMAGE_URL}
         alt='Banner'
         width={500}
         height={500}
         layout='responsive'
-        className='w-full min-h-[400px]'
+        className='w-full min-h-[300px]'
       />
-      <div className='absolute top-0 left-0 h-full flex gap-6 flex-col justify-center p-8 bg-opacity-75 m-0 lg:ml-20 lg:mt-20'>
-        <h2 className='text-5xl font-light text-gray-700'>
+      <div className='absolute top-0 left-0 h-full flex gap-2 md:gap-6 flex-col justify-center p-8 bg-opacity-75 m-0 lg:ml-20 lg:mt-20'>
+        <h2 className='text-2xl md:text-5xl font-light text-gray-700'>
           WELCOME to TRENDZY
         </h2>
-        <p className='mt-2 text-xl max-w-[500px] text-gray-600'>
+        <p className='mt-2 text-md md:text-xl max-w-[500px] text-gray-600'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae non
           dolorem impedit hic dolores, voluptatem odit.
         </p>
@@ -29,7 +27,7 @@ const Banner = () => {
           SHOP NOW
         </a>
       </div>
-    </motion.section>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
-import { useCartContext } from '@/context/CartContext';
 import React, { useCallback } from 'react';
+import { useCartContext } from '@/context/CartContext';
 import CartItem from './CartItem';
 
 const CartTable = () => {
@@ -14,7 +14,7 @@ const CartTable = () => {
   );
 
   return (
-    <table className='w-full border-collapse mt-12'>
+    <table className='w-full mt-12'>
       <tbody>
         {cartItems.map((item) => (
           <CartItem

@@ -1,9 +1,10 @@
-import { fetchProduct, fetchProducts } from '@/api/products';
-import Layout from '@/components/Layout';
-import ProductOverview from '@/components/ProductOverview';
-import { IProduct } from '@/interfaces/product';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { fetchProduct, fetchProducts } from '@/api/products';
+import { IProduct } from '@/interfaces/product';
+import { filterClothingProducts } from '@/utils/product';
+import ProductOverview from '@/components/ProductOverview';
+import Layout from '@/components/Layout';
 
 interface ProductPageProps {
   product: IProduct;
@@ -19,40 +20,33 @@ const ProductPage = ({ product, products }: ProductPageProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const products: IProduct[] = await fetchProducts();
+  try {
+    const products: IProduct[] = await fetchProducts();
 
-  const paths = products
-    .filter(
-      (product) =>
-        product.category === "men's clothing" ||
-        product.category === "women's clothing"
-    )
-    .map((product) => ({
+    const paths = filterClothingProducts(products).map((product) => ({
       params: { id: product.id.toString() },
     }));
 
-  return {
-    paths,
-    fallback: false,
-  };
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return { paths: [], fallback: false };
+  }
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params!;
-
   try {
+    const { id } = params!;
+
     const [product, products] = await Promise.all([
       fetchProduct(Number(id)),
       fetchProducts(),
     ]);
 
-    console.log(product);
-
-    const clothingProducts = products.filter(
-      (product) =>
-        product.category === "men's clothing" ||
-        product.category === "women's clothing"
-    );
+    const clothingProducts = filterClothingProducts(products);
 
     if (!product) {
       return { notFound: true };
@@ -60,7 +54,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: { product, products: clothingProducts },
-      revalidate: 60,
     };
   } catch (error) {
     console.error('Error fetching product or products:', error);

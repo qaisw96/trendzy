@@ -1,6 +1,6 @@
-import { useCartContext } from '@/context/CartContext';
-import Link from 'next/link';
 import React, { useMemo } from 'react';
+import Link from 'next/link';
+import { useCartContext } from '@/context/CartContext';
 
 const Header = () => {
   const { cartItems } = useCartContext();
@@ -18,12 +18,7 @@ const Header = () => {
         <nav>
           <ul className='flex gap-8'>
             <li className='text-base'>
-              <Link href='/' className='hover:underline focus:underline'>
-                HOME
-              </Link>
-            </li>
-            <li className='text-base'>
-              <a href='#products'>SHOP</a>
+              <Link href='/#products'>SHOP</Link>
             </li>
             <li className='text-base flex gap-1'>
               <Link href='/cart' className='hover:underline focus:underline'>

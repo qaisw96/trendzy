@@ -1,9 +1,9 @@
-import { useCartContext } from '@/context/CartContext';
 import React, { useMemo } from 'react';
+import { useCartContext } from '@/context/CartContext';
 import Layout from '@/components/Layout';
 import CartTable from '@/components/CartTable';
 
-const Cart = () => {
+const CartPage = () => {
   const { cartItems } = useCartContext();
 
   const totalAmount = useMemo(() => {
@@ -12,7 +12,7 @@ const Cart = () => {
 
   return (
     <Layout>
-      <section className='container mx-auto py-12 md:py-24 h-screen'>
+      <section className='container mx-auto py-12 md:py-24 min-h-screen'>
         <h1 className='text-3xl mb-4'>SHOPPING CART</h1>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
@@ -30,4 +30,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;

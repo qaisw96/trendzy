@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React from 'react';
+import Image from 'next/image';
 import {
   TransformComponent,
   TransformWrapper,
@@ -32,7 +32,7 @@ const Controls = () => {
   );
 };
 
-const ZoomableImageV2 = ({ src, alt, width, height }: ZoomableImageProps) => {
+const ZoomableImage = ({ src, alt, width, height }: ZoomableImageProps) => {
   return (
     <div className='relative overflow-hidden'>
       <TransformWrapper initialScale={1}>
@@ -54,4 +54,4 @@ const ZoomableImageV2 = ({ src, alt, width, height }: ZoomableImageProps) => {
   );
 };
 
-export default ZoomableImageV2;
+export default ZoomableImage;

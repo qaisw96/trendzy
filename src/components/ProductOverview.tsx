@@ -1,13 +1,12 @@
-import { IProduct } from '@/interfaces/product';
 import React, { useCallback, useState } from 'react';
-import ProductNavigation from './ProductNavigation';
+import { IProduct } from '@/interfaces/product';
 import { useCartContext } from '@/context/CartContext';
 import { isProductInCart } from '@/utils/cart';
+import ProductNavigation from './ProductNavigation';
 import ZoomableImage from './ZoomableImage';
-import { motion } from 'framer-motion';
-import { fadeIn } from '@/motion/motionSettings';
 import ProductDetails from './ProductDetails';
 import ProductActions from './ProductActions';
+import Notification from './Notification';
 
 interface ProductOverviewProps {
   product: IProduct;
@@ -20,7 +19,8 @@ const ProductOverview = ({ product, products }: ProductOverviewProps) => {
   const currentCartItemQuantity =
     cartItems.find((item) => item.id === product.id)?.quantity ?? 0;
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [notificationMessage, setNotificationMessage] = useState<string>('');
 
   const handleQuantityChange = useCallback((quantity: number) => {
     setQuantity(quantity);
@@ -32,6 +32,7 @@ const ProductOverview = ({ product, products }: ProductOverviewProps) => {
     } else {
       addToCart(product, quantity);
     }
+    setNotificationMessage(`${quantity} items Added to cart!`);
   }, [
     product.id,
     quantity,
@@ -40,13 +41,21 @@ const ProductOverview = ({ product, products }: ProductOverviewProps) => {
     currentCartItemQuantity,
   ]);
 
+  const closeNotification = () => {
+    setNotificationMessage('');
+  };
+
   return (
     <section className='container py-12 md:py-24'>
+      <Notification
+        message={notificationMessage}
+        isVisible={!!notificationMessage}
+        onClose={closeNotification}
+      />
       <ProductNavigation products={products} currentProductId={product.id} />
-      <motion.div
-        {...fadeIn}
+      <div
         key={product.id}
-        className='flex flex-col md:flex-row gap-20 py-12 shrink'>
+        className={`flex flex-col md:flex-row gap-20 py-12 shrink animate-fade-in`}>
         <div className='flex-1 p-6 md:p-12 lg:p-24 bg-gray-100'>
           <ZoomableImage
             src={product.image}
@@ -63,7 +72,7 @@ const ProductOverview = ({ product, products }: ProductOverviewProps) => {
             handleAddToCart={handleAddToCart}
           />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
